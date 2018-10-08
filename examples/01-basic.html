@@ -31,6 +31,7 @@
             <button @click="addItem">Add an item</button>-->
             <input type="checkbox" v-model="draggable"/> Draggable
             <input type="checkbox" v-model="resizable"/> Resizable
+            <button @click="click">Click</button>
             <br/>
             <grid-layout :layout="layout"
                          :col-num="12"
@@ -39,6 +40,7 @@
                          :is-resizable="resizable"
                          :vertical-compact="true"
                          :use-css-transforms="true"
+                         ref="layoutComponent"                         
             >
                 <grid-item v-for="item in layout"
                            :x="item.x"
@@ -46,6 +48,7 @@
                            :w="item.w"
                            :h="item.h"
                            :i="item.i"
+                           :mw="300"
                         >
                     <span class="text">{{item.i}}</span>
                 </grid-item>

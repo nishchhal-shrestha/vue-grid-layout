@@ -41,6 +41,12 @@ new Vue({
         resizable: true,
         index: 0
     },
+    methods: 
+        {
+            click: function() {
+                this.$refs.layoutComponent.layoutUpdate();
+            }
+        }
 /*
     mounted: function () {
         this.index = this.layout.length;

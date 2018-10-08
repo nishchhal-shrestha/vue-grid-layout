@@ -170,6 +170,10 @@
             i: {
                 required: true
             },
+            mw: {
+                type: Number,
+                required: false
+            },
             dragIgnoreFrom: {
                 type: String,
                 required: false,
@@ -219,7 +223,8 @@
                 innerX: this.x,
                 innerY: this.y,
                 innerW: this.w,
-                innerH: this.h
+                innerH: this.h,
+                minWidth: this.mw ? this.mw : 0
             }
         },
         created () {
@@ -618,7 +623,7 @@
                         // 0 * Infinity === NaN, which causes problems with resize constriants;
                         // Fix this if it occurs.
                         // Note we do it here rather than later because Math.round(Infinity) causes deopt
-                        width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
+                        width: Math.max(w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]), this.minWidth),
                         height: h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1])
                     };
                 } else {
@@ -628,7 +633,7 @@
                         // 0 * Infinity === NaN, which causes problems with resize constriants;
                         // Fix this if it occurs.
                         // Note we do it here rather than later because Math.round(Infinity) causes deopt
-                        width: w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]),
+                        width: Math.max(w === Infinity ? w : Math.round(colWidth * w + Math.max(0, w - 1) * this.margin[0]), this.minWidth),
                         height: h === Infinity ? h : Math.round(this.rowHeight * h + Math.max(0, h - 1) * this.margin[1])
                     };
                 }
